@@ -3,6 +3,7 @@ import { useState, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import Idea from '../pages/Home/Idea'
+//以下的组件使用异步加载
 const Shopping = lazy(() => import('../pages/Shopping'))
 const Mine = lazy(() => import('../pages/Mine'))
 const Xiaoxi = lazy(() => import('../pages/Xiaoxi'))
@@ -11,14 +12,18 @@ const Faxian = lazy(() => import('../pages/Home/Faxian'))
 const IdeaDetail = lazy(() => import('../pages/Home/Idea/IdeaItem/IdeaDetail'))
 const More = lazy(() => import('../components/More'))
 const Search = lazy(() => import('../components/Search'))
+const Guanzhu=lazy(()=>import('../pages/Guanzhu'))
 
 const RoutesConfig = () => {
     return (
         <Routes>
             <Route path="/" element={<Home />}></Route>
+            {/* 二级路由 */}
             <Route path="/home" element={<Home />}>
+                {/* 注意二级路由的路径需要带上一级路由的路径 */}
                 <Route path="/home/idea" element={<Idea />} />
                 <Route path="/home/faxian" element={<Faxian />} />
+                <Route path="/home/guanzhu" element={<Guanzhu />} />
                 <Route path="/home/city" element={<City />} />
             </Route>
             <Route path="/shopping" element={<Shopping />}></Route>
